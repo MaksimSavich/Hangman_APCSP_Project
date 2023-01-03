@@ -3,10 +3,6 @@ import java.io.*;
 import java.net.*;
 import java.util.*;
 
-/* TODO
-    export all cli methods to a StartGame class
-    integrate database and api functions
- */
 
 public class HangmanGame {
     private static ArrayList<String> techList = new ArrayList<>();
