@@ -5,30 +5,31 @@ import java.util.*;
 
 
 public class HangmanGame {
-    private static ArrayList<String> techList = new ArrayList<>();
+    //initiating all of the variables as their types which are necessary for adequate function of the program
+    private static ArrayList<String> wordList = new ArrayList<>();
     private static ArrayList<String> guessList = new ArrayList<>();
     private static Charcheck[] isCharFoundList;
     private static String wordToGuess;
     private static int mistakes;
     private static final String myListLink = "https://raw.githubusercontent.com/MaksimSavich/programming_terminology_list/main/programming_terms.txt";
 
-    //constructs hangman game with default list
+    //constructs hangman game with a predefined list
     public HangmanGame(ArrayList<String> list){
         this(list, myListLink);
     }
 
-    //constructs hangman game with user inputted word list
+    //constructs hangman game with a word list that is given by the user
     public HangmanGame(ArrayList<String> list, String link){
-        getDict(list, link);
-        techList = list;
-        wordToGuess = randWord(techList);
+        getWordList(list, link);
+        wordList = list;
+        wordToGuess = randWord(wordList);
         createCheckList();
         mistakes = 0;
 
     }
 
     //imports a word list from the internet and applies each word into an arraylist
-    private void getDict(ArrayList<String> list, String link){
+    private void getWordList(ArrayList<String> list, String link){
         try {
             URL url = new URL(link);
             BufferedReader in = new BufferedReader(new InputStreamReader(url.openStream()));
@@ -52,15 +53,22 @@ public class HangmanGame {
         }
     }
 
-    //gets random word from "techList"
+    //gets a random word from "wordList" for the user to guess
     private String randWord(ArrayList<String> list){
         int rand = (int) (Math.random() * list.size());
         return list.get(rand);
     }
-    //creates a checklist containing each character of the word being guessed and if they are found
-    private void createCheckList(){
-        isCharFoundList = new Charcheck[wordToGuess.length()];
 
+    //creates an checklist containing each character of the word being guessed and if they are found
+    private void createCheckList(){
+        //sets “isCharFoundList” as Charcheck object and is constructed as an arraylist of Charcheck objects with the length of the wod to guss
+        isCharFoundList = new Charcheck[wordToGuess.length()];
+        
+        /*
+        this for loop iterates through the word to guess and assigns each character to a Charcheck object’s character value.
+        if the character is not a valid character/English alphabet letter then the character’s Charcheck object’s “isFound” value is set true to display the character when the user is guessing.
+        the entire purpose to check if the character is an English letter is so that the user doesn’t have to guess special letters
+        */
         for(int i = 0; i < isCharFoundList.length; i++){
             if((wordToGuess.substring(i, i + 1).matches("[^A-Za-z]")) || wordToGuess.charAt(i) == ' '){
                 isCharFoundList[i] = new Charcheck(wordToGuess.substring(i, i + 1), true);
@@ -70,13 +78,13 @@ public class HangmanGame {
         }
     }
 
-    //gets the word to guess
+    //gets the word to guess from the variable “wordToGuess”
     public String getWordToGuess(){
         return wordToGuess;
     }
 
     //checks if the character inputted by the user fits strict parameters
-    public int charCheck(String c){
+    public int inputCharCheck(String c){
         //checks if the letter has already been used
         for (String s : guessList) {
             if (c.toLowerCase().equals(s)) {
@@ -112,7 +120,7 @@ public class HangmanGame {
             System.exit(-100);
         }
 
-        wordToGuess = randWord(techList);
+        wordToGuess = randWord(wordList);
         mistakes = 0;
         guessList = new ArrayList<>();
         createCheckList();
@@ -170,6 +178,10 @@ public class HangmanGame {
     //returns game title - saves time
     public static void displayGameTitle(){
         System.out.println("|     Hangman     |\n\n");
+    }
+
+    public static void displayRules(){
+        System.out.println("Rules:\n");
     }
 
 }

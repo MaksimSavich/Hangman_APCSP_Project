@@ -30,13 +30,22 @@ public class EventHandler {
 
     //Checks if the letters are already used
     public static String alreadyUsedLetter(HangmanGame game, String charInput, Scanner scan){
-        while(game.charCheck(charInput) == 0){
+        while(game.inputCharCheck(charInput) == 0){
             EventHandler.refreshConsole(game);
             System.out.println("That letter has already been used");
             charInput = scan.nextLine();
             charInput = onlyLettersCheck(game, charInput, scan);
         }
         return charInput;
+    }
+
+    public static int checkURL(String URL){
+        if(URL.equals("")){
+          return 0;
+        }else if(URL.substring(0, 8).equals("https://") && URL.substring(URL.length() - 4).equals(".txt")){
+            return 1;
+        }
+      return -1;
     }
 
 }
