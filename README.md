@@ -1,4 +1,4 @@
-# Hangman Game ![maven workflow](https://github.com/MaksimSavich/Hangman/actions/workflows/gradle.yml/badge.svg)
+# Hangman Game ![gradle workflow](https://github.com/MaksimSavich/Hangman_APCSP_Project/actions/workflows/gradle.yml/badge.svg)
 
 ## Table of Contents
 
