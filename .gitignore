@@ -2,8 +2,4 @@
 .DS_Store?
 DB_Schema.ods
 /config/config.local.properties
-/.idea/
-/out/
-/target/
-/src/test/
-/Hangman.iml
+./output/
