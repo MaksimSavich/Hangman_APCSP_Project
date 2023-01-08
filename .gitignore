@@ -2,7 +2,6 @@
 .DS_Store?
 DB_Schema.ods
 /config/config.local.properties
-./output/
 
 # Ignore Gradle project-specific cache directory
 .gradle

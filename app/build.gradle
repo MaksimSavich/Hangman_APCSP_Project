@@ -31,7 +31,7 @@ application {
 
 jar {
     manifest {
-        attributes 'Main-Class': 'com.backend.Main'
+        attributes 'Main-Class': 'hangman_apcsp_project.Main'
       }
   }
 

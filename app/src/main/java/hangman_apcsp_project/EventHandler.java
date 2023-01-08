@@ -1,4 +1,4 @@
-package com.backend;
+package hangman_apcsp_project;
 import java.util.Scanner;
 import java.net.*;
 
@@ -31,7 +31,7 @@ public class EventHandler {
 
     //Checks if the letters are already used
     public static String alreadyUsedLetter(HangmanGame game, String charInput, Scanner scan){
-        while(game.inputCharCheck(charInput) == 0){
+        while(game.inputCharacterCheck(charInput) == 0){
             EventHandler.refreshConsole(game);
             System.out.println("That letter has already been used");
             charInput = scan.nextLine();
@@ -40,14 +40,15 @@ public class EventHandler {
         return charInput;
     }
 
+    //checks if the URL is in a valid format, is a txt file, and resolves to a real location
     public static int checkURL(String url){
         
         if(url.equals("")){
             return 0;
-        } else if(url.substring(url.length() - 4).equals(".txt") && EventHandler.isValidURL(url) == true){
+        } else if(EventHandler.isValidURL(url) == true && url.substring(url.length() - 4).equals(".txt")){
             try{
-                URL url2 = new URL(url);
-                HttpURLConnection huc = (HttpURLConnection) url2.openConnection();
+                URL urlToSearch = new URL(url);
+                HttpURLConnection huc = (HttpURLConnection) urlToSearch.openConnection();
                 huc.setRequestMethod("HEAD");
                 int responseCode = huc.getResponseCode();
                 if(responseCode == 200){
@@ -61,6 +62,7 @@ public class EventHandler {
       return -1;
     }
     
+    //checks if the URL is in a vailid format
     public static boolean isValidURL(String url){
         try {
             new URL(url).toURI();

@@ -1,21 +1,21 @@
-package com.backend;
+package hangman_apcsp_project;
 import java.io.*;
 import java.net.*;
 import java.util.*;
 
 
 public class HangmanGame {
-    //initiating all of the variables as their types which are necessary for adequate function of the program
+    //initiating all of the variables as their types which are necessary for adequate function of the game
     private static ArrayList<String> wordList = new ArrayList<>();
     private static ArrayList<String> guessList = new ArrayList<>();
     private static Charcheck[] isCharFoundList;
     private static String wordToGuess;
     private static int mistakes;
-    private static final String myListLink = "https://raw.githubusercontent.com/MaksimSavich/programming_terminology_list/main/programming_terms.txt";
+    private static final String defaultWordListLink = "https://raw.githubusercontent.com/MaksimSavich/programming_terminology_list/main/programming_terms.txt";
 
-    //constructs hangman game with a predefined list
+    //constructs hangman game with the default word list
     public HangmanGame(ArrayList<String> list){
-        this(list, myListLink);
+        this(list, defaultWordListLink);
     }
 
     //constructs hangman game with a word list that is given by the user
@@ -59,15 +59,15 @@ public class HangmanGame {
         return list.get(rand);
     }
 
-    //creates an checklist containing each character of the word being guessed and if they are found
+    //creates a checklist containing each character of the word being guessed and if they are found
     private void createCheckList(){
-        //sets “isCharFoundList” as Charcheck object and is constructed as an arraylist of Charcheck objects with the length of the wod to guss
+        //sets “isCharFoundList” as Charcheck object and is constructed as an arraylist of Charcheck objects with the length of the word to guss
         isCharFoundList = new Charcheck[wordToGuess.length()];
         
         /*
         this for loop iterates through the word to guess and assigns each character to a Charcheck object’s character value.
         if the character is not a valid character/English alphabet letter then the character’s Charcheck object’s “isFound” value is set true to display the character when the user is guessing.
-        the entire purpose to check if the character is an English letter is so that the user doesn’t have to guess special letters
+        the entire purpose to check if the character is an English letter is so that the user doesn’t have to guess special characters
         */
         for(int i = 0; i < isCharFoundList.length; i++){
             if((wordToGuess.substring(i, i + 1).matches("[^A-Za-z]")) || wordToGuess.charAt(i) == ' '){
@@ -84,7 +84,7 @@ public class HangmanGame {
     }
 
     //checks if the character inputted by the user fits strict parameters
-    public int inputCharCheck(String c){
+    public int inputCharacterCheck(String c){
         //checks if the letter has already been used
         for (String s : guessList) {
             if (c.toLowerCase().equals(s)) {
@@ -178,10 +178,6 @@ public class HangmanGame {
     //returns game title - saves time
     public static void displayGameTitle(){
         System.out.println("|     Hangman     | - Type \"QUIT\" to exit the game at any time\n\n");
-    }
-
-    public static void displayRules(){
-        System.out.println("Rules:\n");
     }
 
 }
