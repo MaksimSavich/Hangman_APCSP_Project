@@ -18,7 +18,7 @@ public class Main{
         HangmanGame.displayGameTitle();
 
         //asks the user to make an input to begin the game
-        System.out.println("\nPress \"ENTER\" to begin the game or input \"QUIT\" in all capitals to end the game");
+        System.out.println("\nPress \"ENTER\" to begin the game");
         String beginInput = scan.nextLine();
 
         if(beginInput.equals("QUIT")){
@@ -30,15 +30,31 @@ public class Main{
 
         //asks user if they want to use predefined word list or their own
         if(beginInput.length() >= 0){
-            System.out.println("Type \"YES\" in all capitals to use your own wordlist, otherwise press \"ENTER\" to continue");
-            if(scan.nextLine().equals("YES")){
+            System.out.println("Type \"YES\" in all capitals to use your own word list, otherwise press \"ENTER\" to use a predfined word list.");
+            String inputLink = scan.nextLine();
+            if(inputLink.equals("YES")){
 
-                System.out.println("Input a raw .txt file link containing words split line by line. If you would still rather use the predefined word list then press \"ENTER\"");
-                boolean isLinkValid = EventHandler.checkURL(scan.nextLine());
-              if(isLinkValid){
-                
-              }el
-            } else{
+                System.out.println("Input a raw .txt file link containing words split line by line. If you would still rather use a predefined word list then press \"ENTER\".");
+                String userLink = scan.nextLine();
+                int isLinkFormatGood = EventHandler.checkURL(userLink);
+
+
+                while(isLinkFormatGood == -1){
+                    if(userLink.equals("QUIT")){System.exit(-100);} 
+                    System.out.println("URL Invalid. Please input a new valid link or press \"ENTER\" to use a predefined word list.");
+                    userLink = scan.nextLine();
+                    isLinkFormatGood = EventHandler.checkURL(userLink);
+                }
+                if(isLinkFormatGood == 0){
+                    game = new HangmanGame(wordList);
+                }else if(isLinkFormatGood == 1){
+                        game = new HangmanGame(wordList, userLink);
+                } else{
+                    
+                }
+            } else if(inputLink.equals("QUIT")){
+                System.exit(-100);
+            }else{
                 game = new HangmanGame(wordList);
             }
         }
@@ -57,6 +73,7 @@ public class Main{
                 System.out.println("Input only a single character:");
                 charInput = scan.nextLine();
 
+                if(charInput.equals("QUIT")){game.endGame(true);}
                 charInput = EventHandler.onlyLettersCheck(game, charInput, scan);
                 charInput = EventHandler.alreadyUsedLetter(game, charInput, scan);
                 game.inputCharCheck(charInput);

@@ -177,7 +177,7 @@ public class HangmanGame {
 
     //returns game title - saves time
     public static void displayGameTitle(){
-        System.out.println("|     Hangman     |\n\n");
+        System.out.println("|     Hangman     | - Type \"QUIT\" to exit the game at any time\n\n");
     }
 
     public static void displayRules(){

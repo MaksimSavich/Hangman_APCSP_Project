@@ -1,5 +1,6 @@
 package com.backend;
 import java.util.Scanner;
+import java.net.*;
 
 public class EventHandler {
 
@@ -39,13 +40,36 @@ public class EventHandler {
         return charInput;
     }
 
-    public static int checkURL(String URL){
-        if(URL.equals("")){
-          return 0;
-        }else if(URL.substring(0, 8).equals("https://") && URL.substring(URL.length() - 4).equals(".txt")){
-            return 1;
+    public static int checkURL(String url){
+        
+        if(url.equals("")){
+            return 0;
+        } else if(url.substring(url.length() - 4).equals(".txt") && EventHandler.isValidURL(url) == true){
+            try{
+                URL url2 = new URL(url);
+                HttpURLConnection huc = (HttpURLConnection) url2.openConnection();
+                huc.setRequestMethod("HEAD");
+                int responseCode = huc.getResponseCode();
+                if(responseCode == 200){
+                return 1;
+                }
+            }
+            catch (Exception e){
+                return -1;
+            }    
         }
       return -1;
     }
+    
+    public static boolean isValidURL(String url){
+        try {
+            new URL(url).toURI();
+            return true;
+        }
+        catch (Exception e){
+            return false;
+        }
+    }
+    
 
 }
