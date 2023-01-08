@@ -2,5 +2,5 @@
 
 ## Table of Contents
 
-- [What is the *Hangman Game* project?](#hangman-game-maven-workflowhttpsgithubcommaksimsavichhangmanactionsworkflowsmavenymlbadgesvg)
-- [Roadmap](https://github.com/MaksimSavich/Hangman/wiki/Roadmap)
+- [What is the *Hangman Game* project?]()
+- [Roadmap]()
